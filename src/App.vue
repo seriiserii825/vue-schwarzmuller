@@ -1,27 +1,37 @@
 <template>
-  <div id="app">
-    <app-goals></app-goals>
-  </div>
+    <div id="app">
+        <app-your-name></app-your-name>
+    </div>
 </template>
 
 <script>
-import Goals from './components/Goals.vue';
+import YourName from './components/YourName';
 
 export default {
-  name: 'App',
-  components: {
-    appGoals: Goals
-  }
+    name: 'App',
+    components: {
+        appYourName: YourName
+    }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    min-height: 900px;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    height: 100vh;
+    background: linear-gradient(#1d3131, #131f1f);
+}
+img {
+    max-width: 100%;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }
 </style>
