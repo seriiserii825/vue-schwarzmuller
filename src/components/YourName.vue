@@ -1,14 +1,9 @@
 <template>
     <div class="assignment">
         <h2>Events in action</h2>
-        <!--        show alert-->
-        <p>
-            <button @click="showAlert">Show alert</button>
-        </p>
-        <input type="text" @input="firstInput = $event.target.value">
-        <p>{{ firstInput }}</p>
-        <input type="text" @keyup.enter="secondInput = $event.target.value">
-        <p>{{ secondInput }}</p>
+        <button @click="changeCounter(5)">Add 5</button>
+        <button @click="changeCounter(1)">Add 1</button>
+        <p>Result: {{ result }}</p>
     </div>
 </template>
 
@@ -16,13 +11,30 @@
 export default {
     data() {
         return {
-            firstInput: '',
-            secondInput: ''
+            counter: 0,
+            result: 0
         }
     },
     methods: {
-        showAlert() {
-            alert('show alert')
+        changeCounter(value) {
+            this.counter += value
+        }
+    },
+    watch: {
+        counter() {
+            const result = this.counter
+
+            setTimeout(() => {
+                if (result === this.counter) {
+                    this.counter = 0
+                }
+            }, 5000)
+
+            if (this.counter < 37) {
+                this.result = 'Not there yet'
+            } else {
+                this.result = 'Too much'
+            }
         }
     }
 }
