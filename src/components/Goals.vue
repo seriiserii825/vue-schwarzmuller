@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>{{ courseGoal }}</h2>
+    <p>{{ outputGoals() }}</p>
     <p>Vue js
       <a target="_blank" :href="vueLink">link</a>
     </p>
@@ -15,6 +16,16 @@ export default {
       vueLink: 'http://vuejs.org'
     }
   },
+  methods: {
+    outputGoals() {
+      const randomNumber = Math.random();
+      if (randomNumber > 0.5) {
+        return 'Learn Vue!'
+      } else {
+        return 'Master Vue'
+      }
+    }
+  }
 }
 </script>
 
