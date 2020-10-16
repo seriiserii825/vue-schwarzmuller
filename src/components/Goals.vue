@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>{{ courseGoal }}</h2>
+    <h2>{{ vueTitle }}</h2>
     <p>{{ outputGoals() }}</p>
     <p>Vue js
       <a target="_blank" :href="vueLink">link</a>
@@ -12,7 +12,9 @@
 export default {
   data() {
     return {
-      courseGoal: "Finish the course and learn Vue",
+      vueTitle: 'Vue Course Goals',
+      courseGoalA: "Finish the course and learn Vue",
+      courseGoalB: "Master and create amazing apps",
       vueLink: 'http://vuejs.org'
     }
   },
@@ -20,9 +22,9 @@ export default {
     outputGoals() {
       const randomNumber = Math.random();
       if (randomNumber > 0.5) {
-        return 'Learn Vue!'
+        return this.courseGoalA
       } else {
-        return 'Master Vue'
+        return this.courseGoalB
       }
     }
   }
