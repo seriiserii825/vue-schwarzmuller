@@ -1,16 +1,16 @@
 <template>
     <div id="app">
-        <app-your-name></app-your-name>
+        <app-monster-slayer/>
     </div>
 </template>
 
 <script>
-import YourName from './components/YourName';
+import MonsterSlayer from './components/MonsterSlayer';
 
 export default {
     name: 'App',
     components: {
-        appYourName: YourName
+        appMonsterSlayer: MonsterSlayer
     }
 }
 </script>
@@ -25,9 +25,9 @@ export default {
     box-sizing: border-box;
 }
 body {
-    color: white;
+    color: #333;
     height: 100vh;
-    background: #00523f;
+    background: #f1f1f1;
 }
 img {
     max-width: 100%;
