@@ -27,8 +27,9 @@
                 <h3 v-if="winner === 'player'">You won</h3>
                 <h3 v-else-if="winner === 'monster'">You lost</h3>
                 <h3 v-else>It's a draw</h3>
+                <button @click="startNewGame">Start new game</button>
             </section>
-            <section id="controls">
+            <section id="controls" v-else>
                 <button @click="attackMonster">ATTACK</button>
                 <button
                     @click="specialAttack"
@@ -39,11 +40,17 @@
                     @click="healPlayer"
                 >HEAL
                 </button>
-                <button>SURRENDER</button>
+                <button @click="surrender">SURRENDER</button>
             </section>
             <section id="log" class="container">
                 <h2>Battle Log</h2>
-                <ul></ul>
+                <ul>
+                    <li :key="index" v-for="(log, index) in logs">
+                        <span :class="'log--' + log.who">{{ log.who }} </span>
+                        <span>{{ log.what }} </span>
+                        <span :class="log.what === 'attack' ? 'log--damage' : 'log--heal'">{{ log.value }}</span>
+                    </li>
+                </ul>
             </section>
         </div>
     </div>
@@ -60,7 +67,8 @@ export default {
             monsterHealth: 100,
             playerHealth: 100,
             attackRound: 0,
-            winner: null
+            winner: null,
+            logs: []
         }
     },
     watch: {
@@ -81,11 +89,21 @@ export default {
     },
     computed: {
         monsterBarStyles() {
+            if (this.winner === 'player') {
+                return {
+                    width: '0%'
+                }
+            }
             return {
                 width: this.monsterHealth + '%'
             }
         },
         playerBarStyles() {
+            if (this.winner === 'monster') {
+                return {
+                    width: '0%'
+                }
+            }
             return {
                 width: this.playerHealth + '%'
             }
@@ -95,17 +113,30 @@ export default {
         }
     },
     methods: {
+        startNewGame() {
+            this.logs = []
+            this.playerHealth = 100
+            this.monsterHealth = 100
+            this.winner = null
+            this.attackRound = 0
+        },
         attackMonster() {
             this.attackRound++
-            this.monsterHealth -= getRandomValue(5, 12)
+            const attackValue = getRandomValue(5, 12)
+            this.monsterHealth -= attackValue
+            this.addLogs('monster', 'attack', attackValue)
             this.attackPlayer()
         },
         attackPlayer() {
-            this.playerHealth -= getRandomValue(8, 15)
+            const attackValue = getRandomValue(8, 15)
+            this.playerHealth -= attackValue
+            this.addLogs('player', 'attack', attackValue)
         },
         specialAttack() {
+            const attackValue = getRandomValue(10, 25)
             this.attackRound++
-            this.monsterHealth -= getRandomValue(10, 25)
+            this.monsterHealth -= attackValue
+            this.addLogs('player', 'special-attack', attackValue)
             this.attackPlayer()
         },
         healPlayer() {
@@ -116,7 +147,14 @@ export default {
             } else {
                 this.playerHealth += healValue
             }
-            this.attackPlayer()
+            this.addLogs('player', 'heal', healValue)
+            this.attackMonster()
+        },
+        surrender() {
+            this.winner = 'monster'
+        },
+        addLogs(who, what, value) {
+            this.logs.unshift({who, what, value})
         }
     }
 }
@@ -201,6 +239,8 @@ button:disabled {
 }
 #log li {
     margin: 0.5rem 0;
+    padding: 5px 0;
+    background-color: #e8d7d7;
 }
 .log--player {
     color: #70f;
