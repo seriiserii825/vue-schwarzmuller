@@ -22,13 +22,23 @@
                     ></div>
                 </div>
             </section>
+            <section v-if="winner" class="container">
+                <h2>Game over</h2>
+                <h3 v-if="winner === 'player'">You won</h3>
+                <h3 v-else-if="winner === 'monster'">You lost</h3>
+                <h3 v-else>It's a draw</h3>
+            </section>
             <section id="controls">
                 <button @click="attackMonster">ATTACK</button>
                 <button
                     @click="specialAttack"
                     :disabled="mayUseSpecialAttack"
-                >SPECIAL ATTACK</button>
-                <button>HEAL</button>
+                >SPECIAL ATTACK
+                </button>
+                <button
+                    @click="healPlayer"
+                >HEAL
+                </button>
                 <button>SURRENDER</button>
             </section>
             <section id="log" class="container">
@@ -49,7 +59,24 @@ export default {
         return {
             monsterHealth: 100,
             playerHealth: 100,
-            attackRound: 0
+            attackRound: 0,
+            winner: null
+        }
+    },
+    watch: {
+        playerHealth(value) {
+            if (value <= 0 && this.monsterHealth <= 0) {
+                this.winner = 'draw'
+            } else if (value <= 0) {
+                this.winner = 'monster'
+            }
+        },
+        monsterHealth(value) {
+            if (value <= 0 && this.playerHealth <= 0) {
+                this.winner = 'draw'
+            } else if (value <= 0) {
+                this.winner = 'player'
+            }
         }
     },
     computed: {
@@ -79,6 +106,16 @@ export default {
         specialAttack() {
             this.attackRound++
             this.monsterHealth -= getRandomValue(10, 25)
+            this.attackPlayer()
+        },
+        healPlayer() {
+            const healValue = getRandomValue(8, 20)
+            this.attackRound++
+            if (this.playerHealth + healValue > 100) {
+                this.playerHealth = 100
+            } else {
+                this.playerHealth += healValue
+            }
             this.attackPlayer()
         }
     }
