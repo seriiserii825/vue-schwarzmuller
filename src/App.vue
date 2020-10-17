@@ -18,13 +18,16 @@ export default {
 <style>
 #app {
     min-height: 900px;
+    margin: 0 auto;
+    max-width: 600px;
 }
 * {
     box-sizing: border-box;
 }
 body {
+    color: white;
     height: 100vh;
-    background: linear-gradient(#1d3131, #131f1f);
+    background: #00523f;
 }
 img {
     max-width: 100%;
