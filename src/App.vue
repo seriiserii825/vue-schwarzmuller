@@ -5,9 +5,16 @@
         </header>
         <ul>
             <friend-contact
-                v-for="friend in friends"
-                :key="friend.id"
-                :friend="friend"
+                name="Manuel Lorenz"
+                phone="01234 5678 991"
+                email="manuel@localhost.com"
+                is-favorite="0"
+            />
+            <friend-contact
+                name="Julie Jones"
+                phone="09876 543 221"
+                email="julie@localhost.com"
+                is-favorite="1"
             />
         </ul>
     </div>
@@ -19,11 +26,7 @@ import FriendContact from './components/FriendContact.vue';
 export default {
     data() {
         return {
-            viewDetailsFlag: false,
-            friends: [
-                {id: 1, name: 'Manuel Lorenz', phone: '01234 5678 991', email: 'manuel@localhost.com'},
-                {id: 2, name: 'Julie Jones', phone: '09876 543 221', email: 'julie@localhost.com'},
-            ]
+            viewDetailsFlag: false
         }
     },
     components: {
