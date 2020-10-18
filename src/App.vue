@@ -3,10 +3,11 @@
         <header>
             <h1>FriendList</h1>
         </header>
+        <add-contact @add-contact="addContact"></add-contact>
         <ul>
             <friend-contact
                 v-for="friend in friends"
-                :key="friend.key"
+                :key="friend.id"
                 :id="friend.id"
                 :name="friend.name"
                 :phone="friend.phone"
@@ -20,6 +21,7 @@
 
 <script>
 import FriendContact from './components/FriendContact.vue';
+import NewFriend from './components/NewFriend';
 
 export default {
     data() {
@@ -27,14 +29,19 @@ export default {
             viewDetailsFlag: false,
             friends: [
                 {
-                    key: Date.now(),
                     id: 1,
                     name: 'Manuel Lorenz',
                     phone: '01234 5678 991',
                     email: 'manuel@localhost.com',
                     isFavorite: true
                 },
-                {id: 2, name: 'Julie Jones', phone: '09876 543 221', email: 'julie@localhost.com', isFavorite: false},
+                {
+                    id: 2,
+                    name: 'Julie Jones',
+                    phone: '09876 543 221',
+                    email: 'julie@localhost.com',
+                    isFavorite: false
+                },
             ]
         }
     },
@@ -45,10 +52,21 @@ export default {
             })
 
             friendIdentifire.isFavorite = !friendIdentifire.isFavorite
+        },
+        addContact(name, phone, email) {
+            const newContact = {
+                id: +Date.now(),
+                name: name,
+                phone: phone,
+                email: email,
+                isFavorite: false
+            }
+            this.friends.push(newContact)
         }
     },
     components: {
-        friendContact: FriendContact
+        friendContact: FriendContact,
+        addContact: NewFriend
     }
 }
 </script>
@@ -91,6 +109,7 @@ header {
     padding: 0;
     list-style: none;
 }
+#app form,
 #app li {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     margin: 1rem auto;
