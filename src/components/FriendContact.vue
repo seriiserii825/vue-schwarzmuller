@@ -7,6 +7,7 @@
             <li><strong>Phone:</strong> {{ phone }}</li>
             <li><strong>Email:</strong> {{ email }}</li>
         </ul>
+        <button @click="$emit('delete', id)">Delete</button>
     </li>
 </template>
 

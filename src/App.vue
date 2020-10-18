@@ -14,6 +14,7 @@
                 :email="friend.email"
                 :is-favorite="friend.isFavorite"
                 @toggle-favorite="toggleFavoriteFriend"
+                @delete="deleteContact"
             />
         </ul>
     </div>
@@ -62,6 +63,10 @@ export default {
                 isFavorite: false
             }
             this.friends.push(newContact)
+        },
+        deleteContact(friendId) {
+            // this.friends = this.friends.filter(item => item.id !== friendId)
+            this.friends = this.friends.splice(friendId, 1)
         }
     },
     components: {
