@@ -6,10 +6,13 @@
         <ul>
             <friend-contact
                 v-for="friend in friends"
-                :key="friend.id"
+                :key="friend.key"
+                :id="friend.id"
                 :name="friend.name"
                 :phone="friend.phone"
                 :email="friend.email"
+                :is-favorite="friend.isFavorite"
+                @toggle-favorite="toggleFavoriteFriend"
             />
         </ul>
     </div>
@@ -23,9 +26,25 @@ export default {
         return {
             viewDetailsFlag: false,
             friends: [
-                {id: 1, name: 'Manuel Lorenz', phone: '01234 5678 991', email: 'manuel@localhost.com'},
-                {id: 2, name: 'Julie Jones', phone: '09876 543 221', email: 'julie@localhost.com'},
+                {
+                    key: Date.now(),
+                    id: 1,
+                    name: 'Manuel Lorenz',
+                    phone: '01234 5678 991',
+                    email: 'manuel@localhost.com',
+                    isFavorite: true
+                },
+                {id: 2, name: 'Julie Jones', phone: '09876 543 221', email: 'julie@localhost.com', isFavorite: false},
             ]
+        }
+    },
+    methods: {
+        toggleFavoriteFriend(friendId) {
+            const friendIdentifire = this.friends.find(item => {
+                return item.id === friendId
+            })
+
+            friendIdentifire.isFavorite = !friendIdentifire.isFavorite
         }
     },
     components: {
