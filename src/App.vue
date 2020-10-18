@@ -13,7 +13,7 @@
                 name="Julie Jones"
                 phone="09876 543 221"
                 email="julie@localhost.com"
-                is-favorite="1"
+                :is-favorite="true"
             />
         </ul>
     </div>
