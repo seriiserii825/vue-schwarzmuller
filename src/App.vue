@@ -3,33 +3,30 @@
         <header>
             <h1>FriendList</h1>
         </header>
-        <section id="app">
-            <ul>
-                <li>
-                    <h2>Manuel Lorenz</h2>
-                    <button>Show Details</button>
-                    <ul>
-                        <li><strong>Phone:</strong> 01234 5678 991</li>
-                        <li><strong>Email:</strong> manuel@localhost.com</li>
-                    </ul>
-                </li>
-                <li>
-                    <h2>Julie Jones</h2>
-                    <button>Show Details</button>
-                    <ul>
-                        <li><strong>Phone:</strong> 09876 543 221</li>
-                        <li><strong>Email:</strong> julie@localhost.com</li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
+        <ul>
+            <li v-for="friend in friends" :key="friend.id">
+                <h2>{{ friend.name }}</h2>
+                <button>Show Details</button>
+                <ul>
+                    <li><strong>Phone:</strong> {{ friend.phone }}</li>
+                    <li><strong>Email:</strong> {{ friend.email }}</li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </template>
 
 <script>
 
 export default {
-    name: 'App',
+    data() {
+        return {
+            friends: [
+                {id: 1, name: 'Manuel Lorenz', phone: '01234 5678 991', email: 'manuel@localhost.com'},
+                {id: 2, name: 'Julie Jones', phone: '09876 543 221', email: 'julie@localhost.com'},
+            ]
+        }
+    },
 }
 </script>
 
