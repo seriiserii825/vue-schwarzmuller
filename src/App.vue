@@ -4,19 +4,17 @@
             <h1>FriendList</h1>
         </header>
         <ul>
-            <li v-for="friend in friends" :key="friend.id">
-                <h2>{{ friend.name }}</h2>
-                <button @click="toggleDetails">Show Details</button>
-                <ul v-if="viewDetailsFlag">
-                    <li><strong>Phone:</strong> {{ friend.phone }}</li>
-                    <li><strong>Email:</strong> {{ friend.email }}</li>
-                </ul>
-            </li>
+            <friend-contact
+                v-for="friend in friends"
+                :key="friend.id"
+                :friend="friend"
+            />
         </ul>
     </div>
 </template>
 
 <script>
+import FriendContact from './components/FriendContact.vue';
 
 export default {
     data() {
@@ -28,10 +26,8 @@ export default {
             ]
         }
     },
-    methods: {
-        toggleDetails() {
-            this.viewDetailsFlag = !this.viewDetailsFlag
-        }
+    components: {
+        friendContact: FriendContact
     }
 }
 </script>
