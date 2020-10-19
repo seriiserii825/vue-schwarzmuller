@@ -1,6 +1,8 @@
 <template>
     <div id="app">
+
         <app-monster-slayer/>
+
     </div>
 </template>
 
