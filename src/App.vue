@@ -1,15 +1,36 @@
 <template>
     <div id="app">
-        <header>
-            <h1>Main branch</h1>
-        </header>
+        <div>
+            <the-header></the-header>
+            <badge-list></badge-list>
+            <user-info
+                :full-name="activeUser.name"
+                :info-text="activeUser.description"
+                :role="activeUser.role"
+            ></user-info>
+        </div>
     </div>
 </template>
 
 <script>
+import BadgeList from "@/components/BadgeList"
+import TheHeader from "@/components/TheHeader"
+import UserInfo from "@/components/UserInfo";
+
 export default {
     data() {
-        return {}
+        return {
+            activeUser: {
+                name: 'Maximilian Schwarzmüller',
+                description: 'Site owner and admin',
+                role: 'admin',
+            },
+        }
+    },
+    components: {
+        badgeList: BadgeList,
+        theHeader: TheHeader,
+        userInfo: UserInfo,
     }
 }
 </script>
