@@ -1,15 +1,53 @@
 <template>
     <div id="app">
-        <header>
-            <h1>Main branch</h1>
-        </header>
+        <div>
+            <header>
+                <h1>Component Practice</h1>
+            </header>
+            <active-user
+                :name="name"
+                :age="age"
+            />
+            <user-data
+                @add-data="addData"
+            />
+        </div>
     </div>
 </template>
 
 <script>
+// Task 1:
+// Add two components to the app:
+// An ActiveUser component and an UserData component
+// ActiveUser should output a username (h2) and age (h3)
+// UserData should output two input fields => for name and age
+// Optional: Add styling of your choice
+
+// Task 2: Output both components side-by-side in your main App template
+
+// Task 3: Add user data and ensure it contains a name and age
+// User data should be output in ActiveUser
+// It should be updated via the UserData component
+
+import ActiveUser from './components/ActiveUser.vue';
+import UserData from './components/UserData.vue';
+
 export default {
     data() {
-        return {}
+        return {
+            name: 'Serii',
+            age: 44
+        }
+    },
+    methods: {
+      addData(data){
+          this.name = data.name
+          this.age = data.age
+      }
+    },
+    components: {
+        activeUser: ActiveUser,
+        userData: UserData
     }
 }
 </script>
