@@ -4,7 +4,7 @@
             :topic-title="activeTopic && activeTopic.title"
             :text="activeTopic && activeTopic.fullText"
         ></active-element>
-        <knowledge-base :topics="topics" @select-topic="activateTopic"></knowledge-base>
+        <knowledge-base @select-topic="activateTopic"></knowledge-base>
     </div>
 </template>
 
@@ -15,6 +15,7 @@ import KnowledgeBase from './components/KnowledgeBase.vue';
 export default {
     data() {
         return {
+            activeTopic: null,
             topics: [
                 {
                     id: 'basics',
@@ -32,7 +33,6 @@ export default {
                         'With components, you can split logic (and markup) into separate building blocks and then combine those building blocks (and re-use them) to build powerful user interfaces.',
                 },
             ],
-            activeTopic: null,
         };
     },
     methods: {
@@ -43,6 +43,25 @@ export default {
     components: {
         activeElement: ActiveElement,
         knowledgeBase: KnowledgeBase
+    },
+    provide() {
+        return {
+            topics: this.topics
+        }
+    },
+    mounted() {
+        setTimeout(() => {
+            this.topics.push(
+                {
+                    id: 'event',
+                    title: 'Events',
+                    description:
+                        'Events description',
+                    fullText:
+                        'Events full text',
+                },
+            )
+        }, 3000)
     }
 };
 </script>

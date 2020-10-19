@@ -15,11 +15,11 @@
 import KnowledgeElement from "@/components/KnowledgeElement";
 
 export default {
-    props: ['topics'],
     emits: ['select-topic'],
     components: {
         knowledgeElement: KnowledgeElement
-    }
+    },
+    inject: ['topics']
 
 };
 </script>
