@@ -1,5 +1,8 @@
 <template>
     <div class="badge-card">
+        <header>
+            <slot name="header"></slot>
+        </header>
         <slot></slot>
     </div>
 </template>
@@ -12,7 +15,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     padding: 1rem;
 }
-.badge-card__header {
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
